@@ -20,6 +20,7 @@
 		2BDC280B185F0E2600627E9A /* UIViewController+MaryPopin.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC280A185F0E2600627E9A /* UIViewController+MaryPopin.m */; };
 		2BDC280F185F106300627E9A /* BKTPopinControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC280D185F106300627E9A /* BKTPopinControllerViewController.m */; };
 		2BDC2810185F106300627E9A /* BKTPopinControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDC280E185F106300627E9A /* BKTPopinControllerViewController.xib */; };
+		4C50E1B71D1405A6007DD816 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C50E1B61D1405A6007DD816 /* LaunchScreen.storyboard */; };
 		C2505F60188B28B400FC969F /* BKTiPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2505F5F188B28B400FC969F /* BKTiPadViewController.m */; };
 		C2505F63188B293200FC969F /* BKTiPadDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2505F62188B293200FC969F /* BKTiPadDetailsViewController.m */; };
 		C2505F66188B29D500FC969F /* BKTPopin2ControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2505F65188B29D500FC969F /* BKTPopin2ControllerViewController.m */; };
@@ -49,6 +50,7 @@
 		2BDC280C185F106300627E9A /* BKTPopinControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKTPopinControllerViewController.h; sourceTree = "<group>"; };
 		2BDC280D185F106300627E9A /* BKTPopinControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKTPopinControllerViewController.m; sourceTree = "<group>"; };
 		2BDC280E185F106300627E9A /* BKTPopinControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BKTPopinControllerViewController.xib; sourceTree = "<group>"; };
+		4C50E1B61D1405A6007DD816 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C23FCA09187E89DE000B7EC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		C2505F5E188B28B400FC969F /* BKTiPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKTiPadViewController.h; sourceTree = "<group>"; };
 		C2505F5F188B28B400FC969F /* BKTiPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKTiPadViewController.m; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				2BDC27DC185F0DE900627E9A /* InfoPlist.strings */,
 				2BDC27DF185F0DE900627E9A /* main.m */,
 				2BDC27E1185F0DE900627E9A /* MaryPopinDemo-Prefix.pch */,
+				4C50E1B61D1405A6007DD816 /* LaunchScreen.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				2BDC27DE185F0DE900627E9A /* InfoPlist.strings in Resources */,
 				C2505F68188B29E900FC969F /* BKTPopin2ControllerViewController.xib in Resources */,
 				C2ADB227188DC52D009EABDB /* Main_iPad.storyboard in Resources */,
+				4C50E1B71D1405A6007DD816 /* LaunchScreen.storyboard in Resources */,
 				2BDC27E7185F0DE900627E9A /* Main_iPhone.storyboard in Resources */,
 				2BDC2810185F106300627E9A /* BKTPopinControllerViewController.xib in Resources */,
 			);
