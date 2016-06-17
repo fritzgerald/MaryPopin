@@ -26,6 +26,7 @@
 /**
  * Object to customize blurry background
  */
+DEPRECATED_MSG_ATTRIBUTE("Will be removed in future version")
 @interface BKTBlurParameters : NSObject
 /**
  *  Property to customize background view alpha.
@@ -126,7 +127,7 @@ typedef NS_OPTIONS(NSUInteger, BKTPopinOption) {
     /**
      *  Takes a screenshot of presenting view, blurs it and uses it as dimming view. Available only on ios 7.x.
      */
-    BKTPopinBlurryDimmingView = 1 << 2,
+    BKTPopinBlurryDimmingView DEPRECATED_ATTRIBUTE = 1 << 2,
     /**
      *  Disable parallax effect on iOS7
      */
@@ -172,6 +173,61 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  */
 @interface UIViewController (MaryPopin) <UIDynamicAnimatorDelegate>
 
+@property (weak, readonly) UIViewController *bkt_presentedPopinViewController;
+@property (weak, readonly) UIViewController *bkt_presentingPopinViewController;
+
+/**
+ *  Get / Set the desired size for popin.
+ *
+ *  This value may not be respected if popin is bigger than the presenting controller view.
+ *  If not set, the default size will be the controller view size.
+ */
+@property (assign, nonatomic) CGSize bkt_preferedPopinContentSize;
+
+/**
+ *  The transition style to use when presenting a popin. 
+ *  
+ *  For a list of possible transition style, see `BKTPopinTransitionStyle`.
+ *
+ *  @since v1.0
+ */
+@property (assign, nonatomic) BKTPopinTransitionStyle bkt_popinTransitionStyle;
+
+/**
+ *  The transition direction to use when presenting a popin. Default value is `BKTPopinTransitionDirectionBottom`.
+ *
+ *  @since v1.0
+ */
+@property (assign, nonatomic) BKTPopinTransitionDirection bkt_popinTransitionDirection;
+
+/**
+ *  The options to apply to the popin. Default value is `BKTPopinDefault`.
+ *
+ *  @since v1.0
+ */
+@property (assign, nonatomic) BKTPopinOption bkt_popinOptions;
+
+/**
+ *  The popinCustomAnimation let you pass an custom in animation. The popInController frame must be the finalFrame in the end of the animation.
+ *
+ *  @since v1.3
+ */
+@property (copy, nonatomic) void (^bkt_popinCustomInAnimation)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame);
+
+/**
+ *  The popinCustomOutAnimation let's you pass an custom out animation. The popInController frame must be the finalFrame in the end of the animation.
+ *
+ *  @since v1.3
+ */
+@property (copy, nonatomic) void (^bkt_popinCustomOutAnimation)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame);
+
+/**
+ *  The options to apply to the popin. Default value is `BKTPopinAlignementOptionCentered`.
+ *
+ *  @since v1.3
+ */
+@property (assign, nonatomic) BKTPopinAlignementOption bkt_popinAlignment;
+
 ///---------------------
 /// @name Presentation and dismiss
 ///---------------------
@@ -185,8 +241,13 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -presentPopinController:fromRect:animated:completion:
  *  @since v1.0
  */
-- (void)presentPopinController:(UIViewController *)popinController animated:(BOOL)animated
+- (void)bkt_presentPopinController:(UIViewController *)popinController
+                      animated:(BOOL)animated
                     completion:(void(^)(void))completion;
+
+- (void)presentPopinController:(UIViewController *)popinController
+                      animated:(BOOL)animated
+                    completion:(void(^)(void))completion DEPRECATED_MSG_ATTRIBUTE("use bkt_presentPopinController:animated:completion: instead");
 
 /**
  *  Present a popin controller as a child of the receiver, centered inside an arbitrary rect.
@@ -197,8 +258,15 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @param completion      A completion handler, or `NULL`.
  *  @since v1.0
  */
-- (void)presentPopinController:(UIViewController *)popinController fromRect:(CGRect)rect animated:(BOOL)animated
+- (void)bkt_presentPopinController:(UIViewController *)popinController
+                          fromRect:(CGRect)rect
+                          animated:(BOOL)animated
                     completion:(void(^)(void))completion;
+
+- (void)presentPopinController:(UIViewController *)popinController
+                      fromRect:(CGRect)rect
+                      animated:(BOOL)animated
+                    completion:(void(^)(void))completion DEPRECATED_MSG_ATTRIBUTE("use bkt_presentPopinController:fromRect:animated:completion: instead");
 
 /**
  *  Dismiss the visible popin if any.
@@ -207,7 +275,8 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see dismissCurrentPopinControllerAnimated:completion:
  *  @since v1.0
  */
-- (void)dismissCurrentPopinControllerAnimated:(BOOL)animated;
+- (void)bkt_dismissCurrentPopinControllerAnimated:(BOOL)animated;
+- (void)dismissCurrentPopinControllerAnimated:(BOOL)animated DEPRECATED_MSG_ATTRIBUTE("use bkt_dismissCurrentPopinControllerAnimated: instead");
 
 /**
  *  Dismiss the visible popin if any.
@@ -216,7 +285,8 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @param completion A completion handler, or `NULL`.
  *  @since v1.0
  */
-- (void)dismissCurrentPopinControllerAnimated:(BOOL)animated completion:(void(^)(void))completion;
+- (void)bkt_dismissCurrentPopinControllerAnimated:(BOOL)animated completion:(void(^)(void))completion;
+- (void)dismissCurrentPopinControllerAnimated:(BOOL)animated completion:(void(^)(void))completion DEPRECATED_MSG_ATTRIBUTE("use bkt_dismissCurrentPopinControllerAnimated:completion insteads");
 
 ///---------------------
 /// @name Properties accessors
@@ -229,7 +299,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -presentingPopinViewController
  *  @since v1.0
  */
-- (UIViewController *)presentedPopinViewController;
+- (UIViewController *)presentedPopinViewController DEPRECATED_MSG_ATTRIBUTE("use bkt_presentedPopinViewController instead");
 
 /**
  *  A reference to the parent presenting the popin.
@@ -238,7 +308,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -presentedPopinViewController
  *  @since v1.0
  */
-- (UIViewController *)presentingPopinViewController;
+- (UIViewController *)presentingPopinViewController DEPRECATED_MSG_ATTRIBUTE("use bkt_presentingPopinViewController instead");
 
 /**
  *  Get desired size for popin.
@@ -247,7 +317,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -setPreferedPopinContentSize:
  *  @since v1.0
  */
-- (CGSize)preferedPopinContentSize;
+- (CGSize)preferedPopinContentSize DEPRECATED_MSG_ATTRIBUTE("use bkt_preferedPopinContentSize instead");
 
 /**
  *  Set the desired size for popin. This value may not be respected if popin is bigger than the presenting controller view.
@@ -256,7 +326,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @param preferredSize The desired size for this controller when presented as a popin.
  *  @since v1.0
  */
-- (void)setPreferedPopinContentSize:(CGSize)preferredSize;
+- (void)setPreferedPopinContentSize:(CGSize)preferredSize DEPRECATED_MSG_ATTRIBUTE("use bkt_preferedPopinContentSize instead");
 
 /**
  *  The transition style to use when presenting a popin. Default value is `BKTPopinTransitionStyleSlide`.
@@ -265,7 +335,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -setPopinTransitionStyle:
  *  @since v1.0
  */
-- (BKTPopinTransitionStyle)popinTransitionStyle;
+- (BKTPopinTransitionStyle)popinTransitionStyle DEPRECATED_MSG_ATTRIBUTE("use bkt_popinTransitionStyle instead");
 
 /**
  *  The transition style to use when presenting a popin. For a list of possible transition style, see `BKTPopinTransitionStyle`.
@@ -273,7 +343,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @param transitionStyle A BKTPopinTransitionStyle value.
  *  @since v1.0
  */
-- (void)setPopinTransitionStyle:(BKTPopinTransitionStyle)transitionStyle;
+- (void)setPopinTransitionStyle:(BKTPopinTransitionStyle)transitionStyle DEPRECATED_MSG_ATTRIBUTE("use bkt_popinTransitionStyle instead");
 
 /**
  *  The transition direction to use when presenting a popin. Default value is `BKTPopinTransitionDirectionBottom`.
@@ -282,7 +352,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -setPopinTransitionDirection:
  *  @since v1.0
  */
-- (BKTPopinTransitionDirection)popinTransitionDirection;
+- (BKTPopinTransitionDirection)popinTransitionDirection DEPRECATED_MSG_ATTRIBUTE("use bkt_popinTransitionDirection instead");
 
 /**
  *  The transition direction to use when presenting a popin. For a list of possible transition direction, see BKTPopinTransitionDirection
@@ -290,7 +360,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @param transitionDirection A BKTPopinTransitionDirection value.
  *  @since v1.0
  */
-- (void)setPopinTransitionDirection:(BKTPopinTransitionDirection)transitionDirection;
+- (void)setPopinTransitionDirection:(BKTPopinTransitionDirection)transitionDirection DEPRECATED_MSG_ATTRIBUTE("use bkt_popinTransitionDirection instead");
 
 /**
  *  The options to apply to the popin. Default value is `BKTPopinDefault`.
@@ -299,7 +369,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -setPopinOptions:
  *  @since v1.0
  */
-- (BKTPopinOption)popinOptions;
+- (BKTPopinOption)popinOptions DEPRECATED_MSG_ATTRIBUTE("use bkt_popinOptions instead");
 
 /**
  *  The options to apply to the popin. For a list of possible options, see BKTPopinOption
@@ -307,7 +377,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @param popinOptions The BKTPopinOption values separated by | character.
  *  @since v1.0
  */
-- (void)setPopinOptions:(BKTPopinOption)popinOptions;
+- (void)setPopinOptions:(BKTPopinOption)popinOptions DEPRECATED_MSG_ATTRIBUTE("use bkt_popinOptions instead");
 
 
 /**
@@ -317,7 +387,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -setPopinCustomInAnimation:
  *  @since v1.3
  */
-- (void (^)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame))popinCustomInAnimation;
+- (void (^)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame))popinCustomInAnimation DEPRECATED_MSG_ATTRIBUTE("use bkt_popinCustomInAnimation instead");
 
 /**
  *  The popinCustomAnimation let you pass an custom in animation. The popInController frame must be the finalFrame in the end of the animation.
@@ -325,7 +395,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @param customInAnimation The Block with animation.
  *  @since v1.3
  */
-- (void)setPopinCustomInAnimation:(void (^)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame))customInAnimation;
+- (void)setPopinCustomInAnimation:(void (^)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame))customInAnimation DEPRECATED_MSG_ATTRIBUTE("use bkt_popinCustomInAnimation instead");
 
 /**
  *  Get the custom out animation block. Default value is nil.
@@ -334,7 +404,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -setPopinCustomOutAnimation:
  *  @since v1.3
  */
-- (void (^)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame))popinCustomOutAnimation;
+- (void (^)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame))popinCustomOutAnimation DEPRECATED_MSG_ATTRIBUTE("use bkt_popinCustomOutAnimation instead");
 
 /**
  *  The popinCustomOutAnimation let's you pass an custom out animation. The popInController frame must be the finalFrame in the end of the animation.
@@ -342,7 +412,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @param customOutAnimation The Block with animation.
  *  @since v1.3
  */
-- (void)setPopinCustomOutAnimation:(void (^)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame))customOutAnimation;
+- (void)setPopinCustomOutAnimation:(void (^)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame))customOutAnimation DEPRECATED_MSG_ATTRIBUTE("use bkt_popinCustomOutAnimation instead");
 
 /**
  *  The options to apply to the popin. Default value is `BKTPopinAlignementOptionCentered`.
@@ -351,7 +421,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -setPopinAlignement:
  *  @since v1.3
  */
-- (BKTPopinAlignementOption)popinAlignment;
+- (BKTPopinAlignementOption)popinAlignment DEPRECATED_MSG_ATTRIBUTE("use bkt_popinAlignment instead");
 
 /**
  *  The options to apply to the popin. For a list of possible options, see BKTPopinAlignementOption
@@ -359,7 +429,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @param popinAlignement The BKTPopinAlignementOption values separated by | character.
  *  @since v1.3
  */
-- (void)setPopinAlignment:(BKTPopinAlignementOption)popinAlignment;
+- (void)setPopinAlignment:(BKTPopinAlignementOption)popinAlignment DEPRECATED_MSG_ATTRIBUTE("use bkt_popinAlignment instead");
 
 /**
  *  An object used to configure the blurred background.
@@ -368,7 +438,7 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @see -setBlurParameters:
  *  @since v1.4
  */
-- (BKTBlurParameters *)blurParameters;
+- (BKTBlurParameters *)blurParameters DEPRECATED_ATTRIBUTE;
 
 /**
  *  An object used to configure the blurred background.
@@ -376,6 +446,6 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  *  @param blurParameters The blur parameters object.
  *  @sicne v1.4
  */
-- (void)setBlurParameters:(BKTBlurParameters *)blurParameters;
+- (void)setBlurParameters:(BKTBlurParameters *)blurParameters DEPRECATED_ATTRIBUTE;
 
 @end
